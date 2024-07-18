@@ -7,7 +7,7 @@ import java.security.SecureRandom;
 @Component
 public class RandomUtils {
 
-    private static SecureRandom idGenerator = new SecureRandom();
+    private static final SecureRandom idGenerator = new SecureRandom();
     private static final long MSB = 0x8000000000000000L;
 
     /**

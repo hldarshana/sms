@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+
+  mongo-db:
+    container_name: mongo
+    image: mongo:7.0.5
+    ports:
+      - "27017:27017"
+    restart: always
+    networks:
+      - sms
+
+  api-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sms-server
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - mongo-db
+    networks:
+      - sms
+
+# Networks to be created to facilitate communication between containers
+networks:
+  sms:

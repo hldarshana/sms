@@ -31,6 +31,20 @@ public class ApiResponse<T> {
         this.timestamp = ZonedDateTime.now(ZoneId.of("UTC")).toLocalDateTime();
     }
 
+    public ApiResponse<T> success(){
+        this.status = HttpStatus.OK.value();
+        this.message = HttpStatus.OK.getReasonPhrase();
+        this.timestamp = ZonedDateTime.now(ZoneId.of("UTC")).toLocalDateTime();
+        return this;
+    }
+
+    public ApiResponse<T> success(String message){
+        this.status = HttpStatus.OK.value();
+        this.message = message;
+        this.timestamp = ZonedDateTime.now(ZoneId.of("UTC")).toLocalDateTime();
+        return this;
+    }
+
     public T getData() {
         return data;
     }
@@ -69,12 +83,5 @@ public class ApiResponse<T> {
 
     public void setErrors(List<String> errors) {
         this.errors = errors;
-    }
-
-    public ApiResponse success(){
-        this.status = HttpStatus.OK.value();
-        this.message = HttpStatus.OK.getReasonPhrase();
-        this.timestamp = ZonedDateTime.now(ZoneId.of("UTC")).toLocalDateTime();
-        return this;
     }
 }

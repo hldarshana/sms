@@ -2,6 +2,7 @@ package com.example.sms.shared.dto;
 
 import com.example.sms.validation.OnCreate;
 import com.example.sms.validation.OnUpdate;
+import com.example.sms.validation.annotation.PhoneNumber;
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
@@ -12,25 +13,23 @@ public class StudentDto {
     @NotEmpty(groups = OnUpdate.class, message = "Field 'recordId' cannot be empty")
     private String recordId;
 
-    @NotNull(groups = {OnCreate.class, OnUpdate.class}, message = "First Name cannot be null")
-    @NotEmpty(groups = {OnCreate.class, OnUpdate.class}, message = "First Name name cannot be empty")
+    @NotNull(groups = {OnCreate.class, OnUpdate.class}, message = "First name cannot be null")
+    @NotEmpty(groups = {OnCreate.class, OnUpdate.class}, message = "First name cannot be empty")
     private String firstName;
 
     private String lastName;
 
     private String address;
 
-    /**
-     * For this field, a custom annotation can be introduced with a validator to validate phone numbers.
-     */
+    @PhoneNumber(groups = {OnCreate.class, OnUpdate.class}, message = "Invalid phone number")
     private String telephone;
 
-    @Min(value = 5, message = "Student age should be greater than 5")
-    @Max(value = 18, message = "Student age should be greater than 18")
+    @Min(value = 5, message = "Student age should be between 5-18")
+    @Max(value = 18, message = "Student age should be between 5-18")
     private short age;
 
-    @Min(value = 5, message = "Grade should be greater than 0")
-    @Max(value = 13, message = "Grade should be lower than 13")
+    @Min(value = 1, message = "Grade should be between 1-13")
+    @Max(value = 13, message = "Grade should be between 1-13")
     private short grade;
 
     private LocalDate birthday;
